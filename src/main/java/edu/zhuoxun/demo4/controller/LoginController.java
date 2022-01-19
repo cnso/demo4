@@ -1,6 +1,7 @@
 package edu.zhuoxun.demo4.controller;
 
 import edu.zhuoxun.demo4.entry.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,18 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RestController
 public class LoginController {
+    private final User admin;
+
+    public LoginController(User admin) {
+        this.admin = admin;
+    }
+
+
     @PostMapping("/login")
     @ResponseBody
     public ModelAndView login(User user){
         ModelAndView modelAndView = new ModelAndView("login-view");
-        if (user.getName().equals("admin") && user.getPassword().equals("123456")){
+        if (user.getName().equals(admin.getName()) && user.getPassword().equals(admin.getPassword())){
             modelAndView.addObject("result", "登录成功") ;
         } else {
             modelAndView.addObject("result", "登录失败") ;
