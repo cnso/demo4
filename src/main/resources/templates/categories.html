@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全部分类</title>
+</head>
+<body>
+    <table style="border-inline: black">
+      <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">分类名称</th>
+          </tr>
+      </thead>
+        <tbody>
+            <tr th:each="c: ${ list }">
+                <!--/*@thymesVar id="c" type="edu.zhuoxun.demo4.entry.Category"*/-->
+                <td th:text="${ c.id }"></td>
+                <td th:text="${ c.name }"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

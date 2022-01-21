@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<title></title>
+	</head>
+
+	<body th:fragment="head">
+		<!--
+            	描述：菜单栏
+            -->
+			<div class="container-fluid">
+				<div class="col-md-4">
+					
+				</div>
+				<div class="col-md-4">
+					<img src="/img/header.png"  alt="header"/>
+				</div>
+				<div class="col-md-4" style="padding-top:20px">
+					<ol class="list-inline">
+						<li><a href="/jsp/login.jsp">登录</a></li>
+						<li><a href="/jsp/register.jsp">注册</a></li>
+					</ol>
+				</div>
+			</div>
+			<!--
+            	描述：导航条
+            -->
+			<div class="container-fluid">
+				<nav class="navbar navbar-inverse">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="/">首页</a>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav" id="myUL">
+							</ul>
+							<form class="navbar-form navbar-right" role="search" action="/store/search-servlet" method="get">
+								<div class="form-group">
+									<label>
+										<input type="text" name="keyword" class="form-control" placeholder="关键字">
+									</label>
+									<input type="hidden" name="currentPage" value="1">
+									<input type="hidden" name="pageSize" value="3">
+								</div>
+								<input type="submit" class="btn btn-default" value="搜索">
+							</form>
+
+						</div>
+						<!-- /.navbar-collapse -->
+					</div>
+					<!-- /.container-fluid -->
+				</nav>
+			</div>
+		<script>
+			$(function(){
+				//向服务端CategoryServlet__>gteAllCats发起ajax请求,服务端经过处理,
+				//将所有分类信息以JSON格式的数据返回,获取到返回的所有分类绑定在页面的显示分类区域
+				let url="/category/list";
+				let obj={"method":"findAllCats"};
+				$.post(url,obj,function(data){
+					//alert(data);
+
+					//获取到服务端响应会的数据,经过观察data中存放的是一个JSON格式数组,遍历数组,动态的显示分类区域代码
+					$.each(data,function(i,obj){
+						let li="<li><a href='/store/product-page-servlet?currentPage=1&pageSize=3&cid="+obj.id+"'>"+obj.name+"</a></li>";
+						$("#myUL").append(li);
+					});
+
+				},"json");
+
+
+			});
+		</script>
+	</body>
+</html>

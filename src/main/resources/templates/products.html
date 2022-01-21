@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全部产品</title>
+</head>
+<body>
+    <table>
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">产品名</th>
+            <th scope="col">图片</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p: ${ list }">
+            <!--/*@thymesVar id="p" type="edu.zhuoxun.demo4.entry.Product"*/-->
+            <td th:text="${p.pid}"></td>
+            <td th:text="${p.pname}"></td>
+            <td><img th:src="${ '/' +p.pimage }"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

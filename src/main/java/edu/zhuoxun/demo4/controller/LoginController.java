@@ -4,6 +4,7 @@ import edu.zhuoxun.demo4.entry.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +32,10 @@ public class LoginController {
             modelAndView.addObject("result", "登录失败") ;
         }
         return modelAndView;
+    }
+    @GetMapping("/home")
+    public ModelAndView home() {
+        ModelAndView view = new ModelAndView("index");
+        return view;
     }
 }
